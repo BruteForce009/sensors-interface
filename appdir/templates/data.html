@@ -1,10 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "root.html" %}
 
-</body>
-</html>
+{% block main %}
+
+<div class="sensor-card">
+    <table align="center" cellpadding="10px" cellspacing="10px">
+        <tr>
+            <td>NodeID</td>
+            <td>{{ NodeID }}</td>
+        </tr>
+        <tr>
+            <td>pm1</td>
+            <td>{{ pm1 }}</td>
+        </tr>
+        <tr>
+            <td>pm2</td>
+            <td>{{ pm2 }}</td>
+        </tr>
+        <tr>
+            <td>pm3</td>
+            <td>{{ pm3 }}</td>
+        </tr>
+        <tr>
+            <td>am</td>
+            <td>{{ am }}</td>
+        </tr>
+        <tr>
+            <td>vane_str</td>
+            <td>{{ vane_str }}</td>
+        </tr>
+        <tr>
+            <td>sm</td>
+            <td>{{ sm }}</td>
+        </tr>
+        <tr>
+            <td>temp</td>
+            <td>{{ temp }}</td>
+        </tr>
+        <tr>
+            <td>humd</td>
+            <td>{{ humd }}</td>
+        </tr>
+        <tr>
+            <td>pres</td>
+            <td>{{ pres }}</td>
+        </tr>
+        <tr>
+            <td>lum</td>
+            <td>{{ lum }}</td>
+        </tr>
+        <tr>
+            <td>bat</td>
+            <td>{{ bat }}</td>
+        </tr>
+        <tr>
+            <td>timex</td>
+            <td>{{ timex }}</td>
+        </tr>
+    </table>
+</div>
+
+{% endblock main %}
