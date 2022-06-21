@@ -1,0 +1,177 @@
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  /* background-color: #3A3B3C; */
+  background-color: #AAAAAA;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #444444;
+}
+
+#success-box, #fail-box {
+    display: flex;
+    /* justify-content: center;
+    align-items: center; */
+    /* margin-left:7px;
+    margin-right:7px; */
+    margin: auto;
+    max-width:500px;
+}
+
+#fail-box {
+    margin: auto;
+    max-width:500px;
+}
+
+.content-section, #need-acc, #already-acc {
+    margin-left: 7px;
+}
+
+#welcome {
+    text-align: center;
+    font-family: "Monaco", monospace;
+    font-weight: bold;
+    font-size: 20px;
+    margin: 10px 10px;
+}
+
+tr {
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+  background-color: #D6EEEE;
+}
+
+#sensor-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 15px;
+  padding: 5px 5px;
+  font-family: "Moncao" ,monospace;
+  font-size: 16px;
+}
+
+li, a, button {
+  font-family: "Andalé Mono", monospace;
+  font-weight: 500;
+  font-size: 15px;
+  color: #edf0f1;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 10%;
+} */
+
+header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 30px 5%;
+  width: auto;
+  /* background-color: #242526; */
+  background-color: #3A3B3C;
+}
+
+/* .logo {
+  cursor: pointer;
+} */
+
+.logo {
+  cursor: pointer;
+  margin-right: auto;
+}
+
+.nav-links {
+  list-style: none;
+}
+
+.nav-links li {
+  display: inline-block;
+  padding: 0px 15px;
+}
+
+.nav-links li a {
+  transition: all 0.3s ease 0.1s;
+}
+
+.nav-links li a:hover {
+  color: #0088a9;
+}
+
+button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease 0.1s;
+}
+
+#log-btn {
+  background-color: rgba(82, 194, 2, 1);
+  /* background-color: rgba(126, 250, 17, 1); */
+}
+
+#log-btn:hover {
+  background-color: rgba(82, 194, 2, 0.7);
+  /* background-color: rgba(126, 250, 17, 0.7); */
+}
+
+#sign-btn {
+  background-color: rgba(30, 150, 150, 1);
+}
+
+#sign-btn:hover {
+  background-color: rgba(30, 150, 150, 0.7);
+}
+
+#out-btn{
+  background-color: rgba(30, 150, 150, 1);
+}
+
+#out-btn:hover {
+  background-color: rgba(30, 150, 150, 0.7);
+}
+
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 100px 5px;
+  font-family: "Monaco" ,monospace;
+  font-size: 25px;
+ }
+
+#added-on {
+  font-size: 14px;
+  margin: 5px 35px;
+  padding: 5px 15px;
+}
+
+span {
+  float: auto;
+}
+
+#delete-btn {
+  font-family: "Andalé Mono", monospace;
+  font-weight: 500;
+  font-size: 12px;
+  color: #edf0f1;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 5px 15px;
+  background-color: rgba(242,22,22, 1);
+  border: none;
+  transition: all 0.3s ease 0.1s;
+}
+
+#delete-btn:hover {
+  background-color: rgba(242,22,22, 0.7);
+}

@@ -1,0 +1,29 @@
+{% extends "root.html" %}
+
+{% block main %}
+    <div><p id="welcome"> Welcome {{ current_user.username }}</p></div>
+    <div id="sensor-card">
+        <table align="center" cellpadding="20px" cellspacing="15px">
+            <tr>
+                <th>Model Number</th>
+                <th>Type</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Value</th>
+            </tr>
+            {% for sensors in sensor %}
+            {% set sen_str = sensors %}
+            {% set temp = split_func(sen_str) %}
+            {% set temp1 = temp[1] %}
+            {% set temp1 = strip_func(temp1) %}
+            <tr>
+                <td>{{temp[0]}}</td>
+                <td>{{temp1}}</td>
+                <td>{{temp[2]}}</td>
+                <td>{{temp[3]}}</td>
+                <td>{{temp[4]}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock main %}
