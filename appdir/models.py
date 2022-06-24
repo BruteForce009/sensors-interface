@@ -13,6 +13,7 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(30), unique=True, nullable=False)
     email = db.Column(db.String(45), unique=True, nullable=False)
+    profile_pic = db.Column(db.String(45), nullable=False, default='default.jpg')
     password = db.Column(db.String(60), nullable=False)
     sensors = db.relationship('Sensor', backref='user', lazy=True)
 

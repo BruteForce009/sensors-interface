@@ -5,10 +5,11 @@ import appdir.models
 import appdir.forms
 # from appdir.forms import LoginForm, RegistrationForm
 from flask_login import login_user, current_user, logout_user, login_required
+import os
 import time
+import secrets
 
 
-@app.route('/', methods=['GET', 'POST'])
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -49,13 +50,29 @@ def logout():
     return redirect(url_for('login'))
 
 
-@app.route("/account")
+def save_pic(form_pic):
+    random_hex = secrets.token_hex(8)
+    _, f_ext = os.path.splitext(form_pic.filename)
+    pic_fn = random_hex + f_ext
+    pic_path = os.path.join(app.root_path, 'static/images', pic_fn)
+    form_pic.save(pic_path)
+
+    return pic_fn
+
+
+@app.route("/account", methods=['GET', 'POST'])
 @login_required
 def account():
+    img_file = url_for('static', filename='images/'+current_user.profile_pic)
+    form = appdir.forms.PictureForm()
+    if form.validate_on_submit():
+        pic_file = save_pic(form.picture.data)
+        current_user.profile_pic = pic_file
     sensor = appdir.models.Sensor.query.filter_by(owner=current_user.id).all()
-    return render_template('account.html', title='Account', sensor=sensor)
+    return render_template('account.html', title='Account', sensor=sensor, img_file=img_file, form=form)
 
 
+@app.route('/', methods=['GET', 'POST'])
 @app.route("/data", methods=['GET', 'POST', 'PUT', 'DELETE'])
 def data():
     NodeID = request.args.get('NodeID')

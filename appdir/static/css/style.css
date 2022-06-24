@@ -45,6 +45,31 @@ tr:hover {
   background-color: #D6EEEE;
 }
 
+#PicFormDiv {
+    display: none;
+    animation: fadeEffect 1s;
+}
+
+@keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+#PicForm {
+    margin: 7px;
+}
+
+.bold_em {
+  font-family: "Courier" ,monospace;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+#media-profile {
+  padding: 5px;
+  width: 65px;
+}
+
 .sensor-card {
   display: flex;
   justify-content: center;
