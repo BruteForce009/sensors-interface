@@ -5,11 +5,13 @@ import appdir.models
 import appdir.forms
 # from appdir.forms import LoginForm, RegistrationForm
 from flask_login import login_user, current_user, logout_user, login_required
+from PIL import Image
 import os
 import time
 import secrets
 
 
+@app.route('/', methods=['GET', 'POST'])
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -55,7 +57,11 @@ def save_pic(form_pic):
     _, f_ext = os.path.splitext(form_pic.filename)
     pic_fn = random_hex + f_ext
     pic_path = os.path.join(app.root_path, 'static/images', pic_fn)
-    form_pic.save(pic_path)
+
+    output_size=(55, 65)
+    i = Image.open(form_pic)
+    i.thumbnail(output_size)
+    i.save(pic_path)
 
     return pic_fn
 
@@ -72,7 +78,6 @@ def account():
     return render_template('account.html', title='Account', sensor=sensor, img_file=img_file, form=form)
 
 
-@app.route('/', methods=['GET', 'POST'])
 @app.route("/data", methods=['GET', 'POST', 'PUT', 'DELETE'])
 def data():
     NodeID = request.args.get('NodeID')
@@ -88,4 +93,6 @@ def data():
     lum = request.args.get('tLuminosity')
     bat = request.args.get('tbat')
     timex = request.args.get('ttime')
-    return render_template('data.html', NodeID=NodeID,pm1=pm1, pm2=pm2, pm3=pm3, am=am, vane_str=vane_str, sm=sm, temp=temp, humd=humd, pres=pres, lum=lum, bat=bat, timex=timex)
+    form = appdir.forms.PictureForm()
+    img_file = url_for('static', filename='images/' + current_user.profile_pic)
+    return render_template('data.html', NodeID=NodeID,pm1=pm1, pm2=pm2, pm3=pm3, am=am, vane_str=vane_str, sm=sm, temp=temp, humd=humd, pres=pres, lum=lum, bat=bat, timex=timex, form=form, img_file=img_file)

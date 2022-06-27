@@ -67,8 +67,17 @@ tr:hover {
 
 #media-profile {
   padding: 5px;
+  height: 55px;
   width: 65px;
 }
+
+/* #PicFormDiv {
+  display: none;
+}
+
+#media-profile:hover + #PicFormDiv {
+  display: block;
+} */
 
 .sensor-card {
   display: flex;

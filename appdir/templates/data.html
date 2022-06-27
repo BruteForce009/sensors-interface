@@ -1,7 +1,43 @@
-{% extends "root.html" %}
-
-{% block main %}
-
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Site</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/PictureForm.js')}}"></script>
+    <!-- <link rel="stylesheet" href="../static/css/style.css"> -->
+</head>
+<body>
+<header>
+    <nav>
+        <ul class="nav-links">
+            {% if current_user.is_authenticated %}
+                <li><div class="media-body"><img id="media-profile" class="rounded-circle account-img" src="{{ img_file }}" onclick="PictureForm()" onhover="PictureForm()"></div></li>
+                <li><div><p id="welcome"> Welcome {{ current_user.username }}</p></div></li>
+                <li><a class="nav-item nav-link" href="{{ url_for('logout') }}"><button id="out-btn">Logout</button></a></li>
+                <li><div id="PicFormDiv">
+                <form method="POST" action="" enctype="multipart/form-data" encoding="multipart/form-data">
+                {{ form.hidden_tag() }}
+                <fieldset id="PicForm">
+                    <div>
+                        {{ form.picture(class="form-control-file") }}
+                        {% for error in form.picture.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                <div>
+                    {{ form.submit }}
+                </div></fieldset>
+            </form></div></li>
+            {% else %}
+                <li><a href="{{ url_for('login')}}"><button id="log-btn">Login</button></a></li>
+                <li><a href="{{ url_for('register')}}"><button id="sign-btn">Register</button></a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
 <div class="sensor-card">
     <table align="center" cellpadding="20px" cellspacing="30px">
         <tr>
@@ -59,4 +95,10 @@
     </table>
 </div>
 
-{% endblock main %}
+ <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
