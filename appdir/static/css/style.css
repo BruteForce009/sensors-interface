@@ -10,6 +10,19 @@ h1, h2, h3, h4, h5, h6 {
   color: #444444;
 }
 
+.page-item {
+    margin: 0px 5px;
+}
+
+#pagenav {
+  margin: 7px;
+}
+
+#bold_em {
+  font-weight: bold;
+  background-color: #8c8c8c;
+}
+
 #success-box, #fail-box {
     display: flex;
     /* justify-content: center;
@@ -43,6 +56,13 @@ tr {
 
 tr:hover {
   background-color: #D6EEEE;
+}
+
+.sensor-card {
+  padding: 5px 5px;
+  font-family: "Moncao" ,monospace;
+  font-size: 16px;
+  text-align: center;
 }
 
 #PicFormDiv {

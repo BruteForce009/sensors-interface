@@ -2,10 +2,12 @@ __pycache__/
 *.py[cod]
 *$py.class
 *.db
+linode-setup.txt
 db-cmds.txt
 presentation/
 .vercel/
 .idea/
+venv/
 api/
 *.exe
 vercel.json

@@ -4,6 +4,10 @@ from flask_login import UserMixin
 import enum
 
 
+def remove(string):
+    return string.replace(" ", "|")
+
+
 @login_manager.user_loader
 def load_user(user_username):
     return User.query.get(user_username)
@@ -41,20 +45,22 @@ class Sensor(db.Model, UserMixin):
         return f"{self.model_no} {self.type} {self.latitude} {self.longitude} {self.value}"
 
 
-class SensorData(db.Model, UserMixin):
-    NodeID = db.Column(db.String(100), nullable=False, primary_key=True)
-    tpluviometer1 = db.Column(db.String(100), nullable=True)
-    tpluviometer2 = db.Column(db.String(100), nullable=True)
-    tpluviometer3 = db.Column(db.String(100), nullable=True)
-    tanemometer = db.Column(db.String(100), nullable=True)
-    twd = db.Column(db.String(100), nullable=True)
-    tSoil_moist = db.Column(db.String(100), nullable=True)
-    ttemp = db.Column(db.String(100), nullable=True)
-    thumd = db.Column(db.String(100), nullable=True)
-    tpres = db.Column(db.String(100), nullable=True)
-    tLuminosity = db.Column(db.String(100), nullable=True)
-    tbat = db.Column(db.Float(precision=6), nullable=True)
-    ttime = db.Column(db.String(100), nullable=True)
+class SensorData(db.Model):
+    NodeID = db.Column(db.String(30), nullable=True, unique=False)
+    pm1 = db.Column(db.Float(precision=2), nullable=True, unique=False)
+    pm2 = db.Column(db.Float(precision=2), nullable=True, unique=False)
+    pm3 = db.Column(db.Float(precision=2), nullable=True, unique=False)
+    am = db.Column(db.Float(precision=2), nullable=True, unique=False)
+    twd = db.Column(db.String(30), nullable=True, unique=False)
+    sm1 = db.Column(db.Float(precision=2), nullable=True, unique=False)
+    sm2 = db.Column(db.Float(precision=2), nullable=True, unique=False)
+    st = db.Column(db.Float(precision=2), nullable=True, unique=False)
+    lum = db.Column(db.Float(precision=2), nullable=True, unique=False)
+    temp = db.Column(db.Float(precision=2), nullable=True, unique=False)
+    humd = db.Column(db.Float(precision=2), nullable=True, unique=False)
+    pres = db.Column(db.Float(precision=2), nullable=True, unique=False)
+    bat = db.Column(db.Float(precision=2), nullable=True, unique=False)
+    ttime = db.Column(db.String(30), primary_key=True, default=remove(f'{datetime.utcnow()}'))
 
     def __repr__(self):
-        return f"{self.NodeID} {self.tpluviometer1} {self.tpluviometer2} {self.tpluviometer3} {self.tanemometer} {self.twd} {self.tSoil_moist} {self.ttemp} {self.thumd} {self.tpres} {self.tLuminosity} {self.tbat} {self.ttime}"
+        return f"{self.NodeID} {self.pm1} {self.pm2} {self.pm3} {self.am} {self.twd} {self.sm1} {self.sm2} {self.st} {self.lum} {self.temp} {self.humd} {self.pres} {self.bat} {self.ttime}"

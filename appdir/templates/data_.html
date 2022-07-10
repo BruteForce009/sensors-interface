@@ -1,0 +1,117 @@
+{% extends "root.html" %}
+
+{% block main %}
+
+    <div class="sensor-card">
+    <table align="center" cellpadding="12px" id="sens-table">
+        <tr id="bold_em">
+            <td>NodeID</td>
+            <td>pm1</td>
+            <td>pm2</td>
+            <td>pm3</td>
+            <td>am</td>
+            <td>twd</td>
+            <td>sm1</td>
+            <td>sm2</td>
+            <td>st</td>
+            <td>lum</td>
+            <td>temp</td>
+            <td>humd</td>
+            <td>pres</td>
+            <td>bat</td>
+            <td>ttime</td>
+        </tr>
+        {% for temp in sensors.items %}
+        {% set sen_str = temp %}
+        {% set sensor = split_func(sen_str) %}
+        <tr>
+            <td>{{ sensor[0] }}</td>
+            <td>{{ sensor[1] }}</td>
+            <td>{{ sensor[2] }}</td>
+            <td>{{ sensor[3] }}</td>
+            <td>{{ sensor[4] }}</td>
+            <td>{{ sensor[5] }}</td>
+            <td>{{ sensor[6] }}</td>
+            <td>{{ sensor[7] }}</td>
+            <td>{{ sensor[8] }}</td>
+            <td>{{ sensor[9] }}</td>
+            <td>{{ sensor[10] }}</td>
+            <td>{{ sensor[11] }}</td>
+            <td>{{ sensor[12] }}</td>
+            <td>{{ sensor[13] }}</td>
+            <td>{{ sensor[14] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    </div>
+    {% set prv = sensors.page-1 %}
+    {% set nxt = sensors.page+1 %}
+    <p>{{ttl}}</p>
+    <nav id="pagenav">
+      <ul class="pagination pagination-sm justify-content-center">
+          {% if sensors.page != 1 %}
+        <li class="page-item codinal">
+          <a class="page-link" href="{{ url_for('data_', page=1) }}" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+          <li class="page-item codinal">
+          <a class="page-link" href="{{ url_for('data_', page=prv) }}" aria-label="Previous">
+            <span aria-hidden="true">&lt;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+         {% else %}
+        <li class="page-item disabled codinal">
+          <a class="page-link" href="{{ url_for('data_', page=1) }}" aria-label="Previous" tabindex="-1">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+          <li class="page-item disabled codinal">
+          <a class="page-link" href="{{ url_for('data_', page=prv) }}" aria-label="Previous" tabindex="-1">
+            <span aria-hidden="true">&lt;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+        {% endif %}
+          {% for page_num in sensors.iter_pages(left_current=1, right_current=2) %}
+            {% if page_num %}
+                {% if sensors.page == page_num %}
+                    <li class="page-item active"><a class="page-link" href="{{ url_for('data_', page=page_num) }}">{{ page_num }}</a></li>
+                {% else %}
+                    <li class="page-item"><a class="page-link" href="{{ url_for('data_', page=page_num) }}">{{ page_num }}</a></li>
+                {% endif %}
+            {% endif %}
+          {% endfor %}
+        {% if sensors.page < ttl %}
+        <li class="page-item codinal">
+          <a class="page-link" href="{{ url_for('data_', page=nxt) }}" aria-label="Next">
+            <span aria-hidden="true">&gt;</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+          <li class="page-item codinal">
+          <a class="page-link" href="{{ url_for('data_', page=ttl) }}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+         {% else %}
+          <li class="page-item disabled codinal">
+          <a class="page-link" href="{{ url_for('data_', page=nxt) }}" aria-label="Next" tabindex="-1">
+            <span aria-hidden="true">&gt;</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+          <li class="page-item disabled codinal">
+          <a class="page-link" href="{{ url_for('data_', page=ttl) }}" aria-label="Next" tabindex="-1">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+{% endblock main %}

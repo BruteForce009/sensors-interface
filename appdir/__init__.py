@@ -1,15 +1,11 @@
-import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
-
-basedir = os.path.abspath(os.path.dirname(__file__))
+from appdir.config import Config
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '__RANDOM_KEY__'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'site.db')
-
+app.config.from_object(Config)
 db = SQLAlchemy(app)
 
 bcrypt = Bcrypt(app)
