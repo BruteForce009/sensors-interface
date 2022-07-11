@@ -8,6 +8,6 @@ presentation/
 .vercel/
 .idea/
 venv/
-api/
 *.exe
+junk.html
 vercel.json

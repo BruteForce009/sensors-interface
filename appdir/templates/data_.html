@@ -2,26 +2,33 @@
 
 {% block main %}
 
+    <div class="tab">
+        <a href="{{ url_for('account') }}"><button class="tablinks">Arduino Uno Custom</button></a>
+        <a href="{{ url_for('nrf5') }}"><button class="tablinks">Nordic nRF5 Custom</button></a>
+        <a href="{{ url_for('data_') }}"><button class="tablinks active">Libelium SA Pro</button></a>
+    </div>
+
+    <div class="content-raw" id="SAPro">
     <div class="sensor-card">
-    <table align="center" cellpadding="12px" id="sens-table">
+    <table align="left" cellpadding="12px" id="sens-table">
         <tr id="bold_em">
             <td>NodeID</td>
-            <td>pm1</td>
-            <td>pm2</td>
-            <td>pm3</td>
-            <td>am</td>
-            <td>twd</td>
-            <td>sm1</td>
-            <td>sm2</td>
-            <td>st</td>
-            <td>lum</td>
-            <td>temp</td>
-            <td>humd</td>
-            <td>pres</td>
-            <td>bat</td>
-            <td>ttime</td>
+            <td>Pluvio1</td>
+            <td>Pluvio2</td>
+            <td>Pluvio3</td>
+            <td>Anemo</td>
+            <td>Wind-Vane</td>
+            <td>Soil-Moist1</td>
+            <td>Soil-Moist2</td>
+            <td>Soil-Temp</td>
+            <td>Luminosity</td>
+            <td>Temperature</td>
+            <td>Humidity</td>
+            <td>Pressure</td>
+            <td>Battery</td>
+            <td>Time</td>
         </tr>
-        {% for temp in sensors.items %}
+        {% for temp in sensorL.items %}
         {% set sen_str = temp %}
         {% set sensor = split_func(sen_str) %}
         <tr>
@@ -44,12 +51,11 @@
         {% endfor %}
     </table>
     </div>
-    {% set prv = sensors.page-1 %}
-    {% set nxt = sensors.page+1 %}
-    <p>{{ttl}}</p>
+    {% set prv = sensorL.page-1 %}
+    {% set nxt = sensorL.page+1 %}
     <nav id="pagenav">
       <ul class="pagination pagination-sm justify-content-center">
-          {% if sensors.page != 1 %}
+          {% if sensorL.page != 1 %}
         <li class="page-item codinal">
           <a class="page-link" href="{{ url_for('data_', page=1) }}" aria-label="Previous">
             <span aria-hidden="true">&laquo;</span>
@@ -76,16 +82,16 @@
           </a>
         </li>
         {% endif %}
-          {% for page_num in sensors.iter_pages(left_current=1, right_current=2) %}
+          {% for page_num in sensorL.iter_pages(left_current=1, right_current=2) %}
             {% if page_num %}
-                {% if sensors.page == page_num %}
+                {% if sensorL.page == page_num %}
                     <li class="page-item active"><a class="page-link" href="{{ url_for('data_', page=page_num) }}">{{ page_num }}</a></li>
                 {% else %}
                     <li class="page-item"><a class="page-link" href="{{ url_for('data_', page=page_num) }}">{{ page_num }}</a></li>
                 {% endif %}
             {% endif %}
           {% endfor %}
-        {% if sensors.page < ttl %}
+        {% if sensorL.page < ttl %}
         <li class="page-item codinal">
           <a class="page-link" href="{{ url_for('data_', page=nxt) }}" aria-label="Next">
             <span aria-hidden="true">&gt;</span>
@@ -114,4 +120,7 @@
         {% endif %}
       </ul>
     </nav>
+        </div>
 {% endblock main %}
+
+<!--<button class="tablinks" onclick="openCity(event, 'SAPro')">Libelium SA Pro</button>-->

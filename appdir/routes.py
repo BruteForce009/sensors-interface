@@ -71,18 +71,6 @@ def save_pic(form_pic):
     return pic_fn
 
 
-@app.route("/account", methods=['GET', 'POST'])
-@login_required
-def account():
-    img_file = url_for('static', filename='images/'+current_user.profile_pic)
-    form = appdir.forms.PictureForm()
-    if form.validate_on_submit():
-        pic_file = save_pic(form.picture.data)
-        current_user.profile_pic = pic_file
-    sensor = appdir.models.Sensor.query.filter_by(owner=current_user.id).all()
-    return render_template('account.html', title='Account', sensor=sensor, img_file=img_file, form=form)
-
-
 @app.route("/jsondata", methods=['POST'])
 def jsondata():
     request_data = request.get_json()
@@ -153,8 +141,55 @@ def newjsondata():
 
 
 @app.route("/data_")
+@login_required
 def data_():
+    img_file = url_for('static', filename='images/' + current_user.profile_pic)
+    # form = appdir.forms.PictureForm()
+    # if form.validate_on_submit():
+    #     pic_file = save_pic(form.picture.data)
+    #     current_user.profile_pic = pic_file
     page = request.args.get('page', 1, type=int)
-    sensors = appdir.models.SensorData.query.order_by(appdir.models.SensorData.ttime.desc()).paginate(page=page, per_page=12)
-    ttl = math.floor(sensors.total/12 + 1)
-    return render_template('data_.html', sensors=sensors, ttl=ttl)
+    sensorL = appdir.models.SensorData.query.order_by(appdir.models.SensorData.ttime.desc()).paginate(page=page, per_page=9)
+    ttl = math.floor(sensorL.total/9 + 1)
+    return render_template('data_.html', sensorL=sensorL, ttl=ttl, img_file=img_file)
+
+
+@app.route("/account")
+@login_required
+def account():
+    img_file = url_for('static', filename='images/'+current_user.profile_pic)
+    # form = appdir.forms.PictureForm()
+    # if form.validate_on_submit():
+    #     pic_file = save_pic(form.picture.data)
+    #     current_user.profile_pic = pic_file
+    sensor = appdir.models.Sensor.query.filter_by(owner=current_user.id).all()
+    return render_template('account.html', sensor=sensor, img_file=img_file)
+
+
+@app.route("/nrf5")
+@login_required
+def nrf5():
+    img_file = url_for('static', filename='images/'+current_user.profile_pic)
+    sensor = appdir.models.Sensor.query.filter_by(owner=current_user.id).all()
+    return render_template('nrf5.html', sensor=sensor, img_file=img_file)
+
+
+@app.route("/plot")
+@login_required
+def plot():
+    img_file = url_for('static', filename='images/'+current_user.profile_pic)
+    return render_template('plot.html', img_file=img_file)
+
+
+@app.route("/nrf5_plot")
+@login_required
+def nrf5_plot():
+    img_file = url_for('static', filename='images/'+current_user.profile_pic)
+    return render_template('nrf5_plot.html', img_file=img_file)
+
+
+@app.route("/data_plot")
+@login_required
+def data_plot():
+    img_file = url_for('static', filename='images/'+current_user.profile_pic)
+    return render_template('data_plot.html', img_file=img_file)

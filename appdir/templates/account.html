@@ -1,6 +1,14 @@
 {% extends "root.html" %}
 
 {% block main %}
+
+    <div class="tab">
+        <a href="{{ url_for('account') }}"><button class="tablinks active">Arduino Uno Custom</button></a>
+        <a href="{{ url_for('nrf5') }}"><button class="tablinks">Nordic nRF5 Custom</button></a>
+        <a href="{{ url_for('data_') }}"><button class="tablinks">Libelium SA Pro</button></a>
+    </div>
+
+    <div class="contentraw" id="Uno">
     <div class="sensor-card">
         <table align="center" cellpadding="20px" cellspacing="15px">
             <tr>
@@ -25,4 +33,8 @@
             {% endfor %}
         </table>
     </div>
+    </div>
+
 {% endblock main %}
+
+<!--<button class="tablinks" onclick="openCity(event, 'Uno')" id="defaultOpen">Arduino Uno Custom</button>-->

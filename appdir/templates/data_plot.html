@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Site</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/PictureForm.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/opensensor.js')}}"></script>
+</head>
+<body>
+<header>
+    <nav>
+        <ul class="nav-links">
+            <li><div class="media-body"><img id="media-profile" class="rounded-circle account-img" src="{{ img_file }}" onclick="PictureForm()"></div></li>
+            <li><div><p id="welcome"> Welcome {{ current_user.username }}</p></div></li>
+            <li><a class="nav-item nav-link" href="{{ url_for('account') }}"><button class="op-button" id="plot-btn">Data</button></a></li>
+            <li><a class="nav-item nav-link" href="{{ url_for('logout') }}"><button class="op-button" id="out-btn">Logout</button></a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="tab">
+    <a href="{{ url_for('plot') }}"><button class="tablinks">Arduino Uno Custom</button></a>
+    <a href="{{ url_for('nrf5_plot') }}"><button class="tablinks">Nordic nRF5 Custom</button></a>
+    <a href="{{ url_for('data_plot') }}"><button class="tablinks active">Libelium SA Pro</button></a>
+</div>
+
+</body>
+</html>
