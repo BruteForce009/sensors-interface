@@ -10,4 +10,5 @@ presentation/
 venv/
 *.exe
 junk.html
+junk.py
 vercel.json

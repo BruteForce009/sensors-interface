@@ -10,10 +10,9 @@ h1, h2, h3, h4, h5, h6 {
   color: #444444;
 }
 
-td
-{
-    text-align: center;
-    vertical-align: middle;
+td {
+  text-align: center;
+  vertical-align: middle;
 }
 
 .page-item {
