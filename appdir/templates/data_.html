@@ -12,7 +12,6 @@
     <div class="sensor-card">
     <table cellpadding="7px" id="sens-table">
         <tr id="bold_em">
-            <td>NodeID</td>
             <td>Pluvio1</td>
             <td>Pluvio2</td>
             <td>Pluvio3</td>
@@ -34,7 +33,6 @@
         {% set sen_str = temp %}
         {% set sensor = split_func(sen_str) %}
         <tr>
-            <td>{{ sensor[0] }}</td>
             <td>{{ sensor[1] }}</td>
             <td>{{ sensor[2] }}</td>
             <td>{{ sensor[3] }}</td>

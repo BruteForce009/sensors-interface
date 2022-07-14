@@ -8,23 +8,24 @@
         <a href="{{ url_for('data_') }}"><button class="tablinks">Libelium SA Pro</button></a>
     </div>
 
-    <div class="content-raw" id="SAPro">
+    <div class="content-raw" id="Nrf">
     <div class="sensor-card">
-    <table cellpadding="9px" id="sens-table">
-        <tr id="bold_em">
-            <td>NodeID</td>
+    <table cellpadding="7px" id="sens-table">
+         <tr id="bold_em">
             <td>Pluvio1</td>
             <td>Pluvio2</td>
             <td>Pluvio3</td>
             <td>Anemo</td>
-            <td>Wind-Vane</td>
-            <td>Soil-Moist1</td>
-            <td>Soil-Moist2</td>
+            <td>Wind</td>
+            <td>Soil-Moist</td>
             <td>Soil-Temp</td>
             <td>Luminosity</td>
             <td>Temperature</td>
             <td>Humidity</td>
             <td>Pressure</td>
+            <td>Latitude</td>
+            <td>Longitude</td>
+            <td>Altitude</td>
             <td>Battery</td>
             <td>Time</td>
         </tr>
@@ -32,7 +33,6 @@
         {% set sen_str = temp %}
         {% set sensor = split_func(sen_str) %}
         <tr>
-            <td>{{ sensor[0] }}</td>
             <td>{{ sensor[1] }}</td>
             <td>{{ sensor[2] }}</td>
             <td>{{ sensor[3] }}</td>
@@ -44,9 +44,11 @@
             <td>{{ sensor[9] }}</td>
             <td>{{ sensor[10] }}</td>
             <td>{{ sensor[11] }}</td>
-            <td>{{ sensor[12] }}</td>
-            <td>{{ sensor[13] }}</td>
-            <td>{{ sensor[14] }}</td>
+            <td>{{ sensor[12] }}{{ sensor[13] }}</td>
+            <td>{{ sensor[14] }}{{ sensor[15] }}</td>
+            <td>{{ sensor[16] }}</td>
+            <td>{{ sensor[17] }}</td>
+            <td>{{ sensor[18] }}</td>
         </tr>
         {% endfor %}
     </table>
