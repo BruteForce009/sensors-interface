@@ -1,11 +1,11 @@
 from flask import render_template, url_for, flash, redirect, get_flashed_messages, request
 from appdir import app, db, bcrypt, mail
-import appdir.models
-import appdir.forms
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
-from PIL import Image
 from datetime import datetime
+from PIL import Image
+import appdir.models
+import appdir.forms
 import os
 import time
 import math
