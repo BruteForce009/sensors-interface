@@ -37,6 +37,22 @@ def reformat(string):
 
 
 @app.route('/', methods=['GET', 'POST'])
+def lora():
+    if request.method == 'POST':
+        request_data = request.get_json()
+        if request_data:
+            file = open("jsondata.json", 'w')
+            json.dump(request_data, file)
+            file.close()
+            return 'Done'
+        else:
+            return 'Not Done'
+    file = open("jsondata.json", 'r')
+    jdata = file.read()
+    file.close()
+    return render_template('lora.html', request_data=jdata)
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:

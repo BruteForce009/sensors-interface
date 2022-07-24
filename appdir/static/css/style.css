@@ -13,6 +13,11 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Monaco", monospace;
 }
 
+.unit {
+  font-size: 10px;
+  background-color: #8c8c8c;
+}
+
 td {
   text-align: center;
   vertical-align: middle;
@@ -29,6 +34,7 @@ td {
 #bold_em {
   font-weight: bold;
   background-color: #8c8c8c;
+  font-size: 14px;
 }
 
 #success-box, #fail-box {
@@ -81,12 +87,6 @@ tr:hover {
     margin: 7px;
 }
 
-.bold_em {
-  font-family: "Courier" ,monospace;
-  font-size: 14px;
-  font-weight: bold;
-}
-
 #media-profile {
   padding: 5px;
   height: 55px;
@@ -109,7 +109,7 @@ tr:hover {
   margin: 14px 7px;
   padding: 5px 5px;
   font-family: "Moncao" ,monospace;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 li, a, button {
