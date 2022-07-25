@@ -21,22 +21,11 @@
     </nav>
 </header>
 
-    <div class="tab">
-        <a href="{{ url_for('data_plot') }}"><button class="tablinks active">Pluvio 1</button></a>
-        <a href="{{ url_for('pm2') }}"><button class="tablinks">Pluvio 2</button></a>
-        <a href="{{ url_for('pm3') }}"><button class="tablinks">Pluvio 3</button></a>
-        <a href="{{ url_for('anemo') }}"><button class="tablinks">Anemometer</button></a>
-        <a href="{{ url_for('sm') }}"><button class="tablinks">Soil Moisture</button></a>
-        <a href="{{ url_for('st') }}"><button class="tablinks">Soil Temperature</button></a>
-        <a href="{{ url_for('lum') }}"><button class="tablinks">Luminosity</button></a>
-        <a href="{{ url_for('temp') }}"><button class="tablinks">Temperature</button></a>
-        <a href="{{ url_for('humd') }}"><button class="tablinks">Humidity</button></a>
-        <a href="{{ url_for('pres') }}"><button class="tablinks">Pressure</button></a>
-    </div>
-
-    <div class="plotz">
-        <img src="{{url_for('static', filename='images/pm1.png')}}" class="imgplotz"/>
-    </div>
+<div class="tab">
+    <a href="{{ url_for('plot') }}"><button class="tablinks">Arduino Uno Custom</button></a>
+    <a href="{{ url_for('nrf5_plot') }}"><button class="tablinks">Nordic nRF5 Custom</button></a>
+    <a href="{{ url_for('data_plot') }}"><button class="tablinks active">Libelium SA Pro</button></a>
+</div>
 
 </body>
 </html>

@@ -22,10 +22,10 @@
 </header>
 
     <div class="tab">
-        <a href="{{ url_for('data_plot') }}"><button class="tablinks active">Pluvio 1</button></a>
+        <a href="{{ url_for('data_plot') }}"><button class="tablinks">Pluvio 1</button></a>
         <a href="{{ url_for('pm2') }}"><button class="tablinks">Pluvio 2</button></a>
         <a href="{{ url_for('pm3') }}"><button class="tablinks">Pluvio 3</button></a>
-        <a href="{{ url_for('anemo') }}"><button class="tablinks">Anemometer</button></a>
+        <a href="{{ url_for('anemo') }}"><button class="tablinks active">Anemometer</button></a>
         <a href="{{ url_for('sm') }}"><button class="tablinks">Soil Moisture</button></a>
         <a href="{{ url_for('st') }}"><button class="tablinks">Soil Temperature</button></a>
         <a href="{{ url_for('lum') }}"><button class="tablinks">Luminosity</button></a>
@@ -35,7 +35,7 @@
     </div>
 
     <div class="plotz">
-        <img src="{{url_for('static', filename='images/pm1.png')}}" class="imgplotz"/>
+        <img src="{{url_for('static', filename='images/am.png')}}" class="imgplotz"/>
     </div>
 
 </body>

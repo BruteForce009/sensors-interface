@@ -6,11 +6,20 @@ from datetime import datetime
 from PIL import Image
 import appdir.models
 import appdir.forms
+from datetime import datetime
+import pandas as pd
+import numpy as np
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 import os
 import time
 import math
 import json
 import secrets
+
+
+plt.rcParams['figure.figsize'] = [14, 5]
 
 
 def save_pic(form_pic):
@@ -396,8 +405,212 @@ def nrf5_plot():
 @app.route("/data_plot")
 @login_required
 def data_plot():
-    img_file = url_for('static', filename='images/'+current_user.profile_pic)
+    conn = db.engine.connect()
+    df = pd.read_sql_table('sensor_data', conn)
+    sorted = df.sort_values(by='rtctime', ascending=True)
+    ttime = sorted['rtctime']
+    pm1 = sorted['pm1']
+    x_indexes = np.arange(len(ttime))
+    plt.figure(1)
+    plt.style.use('fivethirtyeight')
+    plt.bar(x_indexes, pm1, label='pm1')
+    plt.xlabel('Readings (288/day)')
+    plt.ylabel('Rain in the current hour (mm)')
+    plt.title('Pluviometer 1')
+    plt.grid(True)
+    plt.savefig('appdir/static/images/pm1.png')
+    img_file = url_for('static', filename='images/' + current_user.profile_pic)
     return render_template('data_plot.html', img_file=img_file)
+
+
+@app.route("/pm2")
+@login_required
+def pm2():
+    conn = db.engine.connect()
+    df = pd.read_sql_table('sensor_data', conn)
+    sorted = df.sort_values(by='rtctime', ascending=True)
+    ttime = sorted['rtctime']
+    pm2 = sorted['pm2']
+    x_indexes = np.arange(len(ttime))
+    plt.figure(2)
+    plt.style.use('fivethirtyeight')
+    plt.bar(x_indexes, pm2, label='pm2')
+    plt.xlabel('Readings (288/day)')
+    plt.ylabel('Rain in the previous hour (mm)')
+    plt.title('Pluviometer 2')
+    plt.grid(True)
+    plt.savefig('appdir/static/images/pm2.png')
+    img_file = url_for('static', filename='images/' + current_user.profile_pic)
+    return render_template('pm2.html', img_file=img_file)
+
+
+@app.route("/pm3")
+@login_required
+def pm3():
+    conn = db.engine.connect()
+    df = pd.read_sql_table('sensor_data', conn)
+    sorted = df.sort_values(by='rtctime', ascending=True)
+    ttime = sorted['rtctime']
+    pm3 = sorted['pm3']
+    x_indexes = np.arange(len(ttime))
+    plt.figure(3)
+    plt.style.use('ggplot')
+    plt.plot(x_indexes, pm3, label='pm3')
+    plt.xlabel('Readings (288/day)')
+    plt.ylabel('Rain in the last 24 hours (mm)')
+    plt.title('Pluviometer 3')
+    plt.grid(True)
+    plt.savefig('appdir/static/images/pm3.png')
+    img_file = url_for('static', filename='images/' + current_user.profile_pic)
+    return render_template('pm3.html', img_file=img_file)
+
+
+@app.route("/anemo")
+@login_required
+def anemo():
+    conn = db.engine.connect()
+    df = pd.read_sql_table('sensor_data', conn)
+    sorted = df.sort_values(by='rtctime', ascending=True)
+    ttime = sorted['rtctime']
+    am = sorted['am']
+    x_indexes = np.arange(len(ttime))
+    plt.figure(4)
+    plt.style.use('fivethirtyeight')
+    plt.bar(x_indexes, am, label='Anemometer')
+    plt.xlabel('Readings (288/day)')
+    plt.ylabel('Wind Speed (km/h)')
+    plt.title('Anemometer')
+    plt.grid(True)
+    plt.savefig('appdir/static/images/am.png')
+    img_file = url_for('static', filename='images/' + current_user.profile_pic)
+    return render_template('anemo.html', img_file=img_file)
+
+
+@app.route("/sm")
+@login_required
+def sm():
+    conn = db.engine.connect()
+    df = pd.read_sql_table('sensor_data', conn)
+    sorted = df.sort_values(by='rtctime', ascending=True)
+    ttime = sorted['rtctime']
+    sm = sorted['sm']
+    x_indexes = np.arange(len(ttime))
+    plt.figure(5)
+    plt.style.use('fivethirtyeight')
+    plt.bar(x_indexes, sm, label='Soil Moisture')
+    plt.xlabel('Readings (288/day)')
+    plt.ylabel('Soil moisture (centibar)')
+    plt.title('Watermark')
+    plt.grid(True)
+    plt.savefig('appdir/static/images/sm.png')
+    img_file = url_for('static', filename='images/' + current_user.profile_pic)
+    return render_template('sm.html', img_file=img_file)
+
+
+@app.route("/st")
+@login_required
+def st():
+    conn = db.engine.connect()
+    df = pd.read_sql_table('sensor_data', conn)
+    sorted = df.sort_values(by='rtctime', ascending=True)
+    ttime = sorted['rtctime']
+    st = sorted['st']
+    x_indexes = np.arange(len(ttime))
+    plt.figure(6)
+    plt.style.use('fivethirtyeight')
+    plt.bar(x_indexes, st, label='Soil Temperature')
+    plt.xlabel('Readings (288/day)')
+    plt.ylabel('Soil Temperature (°C)')
+    plt.title('PT-1000')
+    plt.grid(True)
+    plt.savefig('appdir/static/images/st.png')
+    img_file = url_for('static', filename='images/' + current_user.profile_pic)
+    return render_template('st.html', img_file=img_file)
+
+
+@app.route("/lum")
+@login_required
+def lum():
+    conn = db.engine.connect()
+    df = pd.read_sql_table('sensor_data', conn)
+    sorted = df.sort_values(by='rtctime', ascending=True)
+    ttime = sorted['rtctime']
+    lum = sorted['lum']
+    x_indexes = np.arange(len(ttime))
+    plt.figure(7)
+    plt.style.use('fivethirtyeight')
+    plt.bar(x_indexes, lum, label='Luminosity')
+    plt.xlabel('Readings (288/day)')
+    plt.ylabel('Illuminance (lux)')
+    plt.title('Luminosity')
+    plt.grid(True)
+    plt.savefig('appdir/static/images/lum.png')
+    img_file = url_for('static', filename='images/' + current_user.profile_pic)
+    return render_template('lum.html', img_file=img_file)
+
+
+@app.route("/temp")
+@login_required
+def temp():
+    conn = db.engine.connect()
+    df = pd.read_sql_table('sensor_data', conn)
+    sorted = df.sort_values(by='rtctime', ascending=True)
+    ttime = sorted['rtctime']
+    temp = sorted['temp']
+    x_indexes = np.arange(len(ttime))
+    plt.figure(8)
+    plt.style.use('fivethirtyeight')
+    plt.bar(x_indexes, temp, label='Temperature')
+    plt.xlabel('Readings (288/day)')
+    plt.ylabel('Celsius (°C)')
+    plt.title('Temperature')
+    plt.grid(True)
+    plt.savefig('appdir/static/images/temp.png')
+    img_file = url_for('static', filename='images/' + current_user.profile_pic)
+    return render_template('temp.html', img_file=img_file)
+
+
+@app.route("/humd")
+@login_required
+def humd():
+    conn = db.engine.connect()
+    df = pd.read_sql_table('sensor_data', conn)
+    sorted = df.sort_values(by='rtctime', ascending=True)
+    ttime = sorted['rtctime']
+    humd = sorted['humd']
+    x_indexes = np.arange(len(ttime))
+    plt.figure(9)
+    plt.style.use('fivethirtyeight')
+    plt.bar(x_indexes, humd, label='Humidity')
+    plt.xlabel('Readings (288/day)')
+    plt.ylabel('Percentage (%)')
+    plt.title('humd')
+    plt.grid(True)
+    plt.savefig('appdir/static/images/humd.png')
+    img_file = url_for('static', filename='images/' + current_user.profile_pic)
+    return render_template('humd.html', img_file=img_file)
+
+
+@app.route("/pres")
+@login_required
+def pres():
+    conn = db.engine.connect()
+    df = pd.read_sql_table('sensor_data', conn)
+    sorted = df.sort_values(by='rtctime', ascending=True)
+    ttime = sorted['rtctime']
+    pres = sorted['pres']
+    pres = pres/101325
+    x_indexes = np.arange(len(ttime))
+    plt.figure(10)
+    plt.style.use('fivethirtyeight')
+    plt.bar(x_indexes, pres, label='Pressure')
+    plt.xlabel('Readings (288/day)')
+    plt.ylabel('Standard Atmosphere (atm)')
+    plt.title('Pressure')
+    plt.grid(True)
+    plt.savefig('appdir/static/images/pres.png')
+    img_file = url_for('static', filename='images/' + current_user.profile_pic)
+    return render_template('pres.html', img_file=img_file)
 
 
 def send_reset_email(user):
