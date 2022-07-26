@@ -10,4 +10,4 @@ venv/
 *.exe
 junk.html
 junk.py
-images/*.png
+*.png
