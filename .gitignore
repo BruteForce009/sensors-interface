@@ -5,10 +5,9 @@ __pycache__/
 linode-setup.txt
 db-cmds.txt
 presentation/
-.vercel/
 .idea/
 venv/
 *.exe
 junk.html
 junk.py
-vercel.json
+images/*.png
