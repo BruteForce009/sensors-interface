@@ -1,4 +1,4 @@
-from flask import render_template, url_for, flash, redirect, get_flashed_messages, request
+from flask import render_template, url_for, flash, redirect, get_flashed_messages, request, send_from_directory
 from appdir import app, db, bcrypt, mail
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
@@ -7,12 +7,14 @@ from PIL import Image
 import appdir.models
 import appdir.forms
 from datetime import datetime
+# from io import BytesIO
 import pandas as pd
 import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import os
+import csv
 import time
 import math
 import json
@@ -45,7 +47,19 @@ def reformat(string):
     return int(newstring)
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/csv')
+def csv():
+    conn = db.engine.connect()
+    df = pd.read_sql_table('sensor_data', conn)
+    frame = pd.DataFrame(df)
+
+    frame.to_csv('appdir/files/data.csv')
+    return send_from_directory('files', "data.csv")
+    # sensors = appdir.models.SensorData.query.all()
+    # return send_file(BytesIO(frame), attachment_filename="data.csv", as_attachment=True)
+
+
+@app.route('/lora', methods=['GET', 'POST'])
 def lora():
     if request.method == 'POST':
         request_data = request.get_json()
@@ -62,6 +76,7 @@ def lora():
     return render_template('lora.html', request_data=jdata)
 
 
+@app.route('/', methods=['GET', 'POST'])
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:

@@ -11,3 +11,4 @@ venv/
 junk.html
 junk.py
 *.png
+!down_logo.png
